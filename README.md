@@ -4,3 +4,5 @@ Handmade basic renderer to generate PNGs on CPU. Just for fun.
 
 Requires `libpng`.
 
+![Example](sphere-c.png)
+
