@@ -32,7 +32,7 @@ namespace im {
       }
 
       void paint_pixels_parallel(std::function<pixel(unsigned, unsigned)> painter) {
-         #pragma omp parallel for
+         #pragma omp parallel for schedule(dynamic, 16)
          for (int j = 0; j < height; j++) {
             int idx = j*width;
             for (int i = 0; i < width; i++) {

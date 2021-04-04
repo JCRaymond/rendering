@@ -59,7 +59,7 @@ int main() {
       return {32, 196, 255};
    });
 
-   im.write("sphere.png"); 
+   im.write("render.png"); 
 
    std::cout << "Time: " << t.get_time() << std::endl;
 }
