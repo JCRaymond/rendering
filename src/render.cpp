@@ -6,8 +6,8 @@
 
 int main() {
    auto t = timer();
-   const unsigned im_x = 1920;
-   const unsigned im_y = 1080;
+   const unsigned im_x = 1600;
+   const unsigned im_y = 900;
 
    vec3 viewpoint = {10,10,10};
    vec3 pointing_at = {0,0,2};
