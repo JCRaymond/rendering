@@ -32,7 +32,7 @@ int main() {
    double radius = 2;
    vec3 sphere_center = {0,0,radius};
    
-   im.paint_pixels_parallel([&](unsigned x, unsigned y) -> im::pixel {
+   im.paint_frame([&](unsigned x, unsigned y) -> im::pixel {
       auto dir = pixel_tl + x * pixel_dx + y * pixel_dy;
 
       auto d = dir.normalized();

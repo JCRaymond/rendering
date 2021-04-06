@@ -1,3 +1,7 @@
+
+#ifndef TIMER_HPP
+#define TIMER_HPP
+
 #include <chrono>
 
 struct timer {
@@ -17,3 +21,6 @@ public:
    }
 
 };
+
+#endif
+

@@ -27,8 +27,9 @@ int main() {
    //const unsigned im_x = 15240;
    //const unsigned im_y = 8640;
 
-   double height = 0.00003; //0.00003;
-   complex center = {-0.761575990961605,-0.084759600310245}; // Spiral!
+   double height = 1; //0.00003;
+   complex center = {0,0};
+   //complex center = {-0.761575990961605,-0.084759600310245}; // Spiral!
    //complex center = {-0.685, 0.3};
    double pixel_height = 2 * (height / im_y);
 
@@ -40,16 +41,16 @@ int main() {
 
    im::image<im_x, im_y> im;
 
-   const int iterlim = 25000;
+   const int iterlim = 100;
    int cycle = 50;
 
-   im.paint_pixels_parallel([&](unsigned x, unsigned y) -> im::pixel {
+   im.paint_frame([&](unsigned x, unsigned y) -> im::pixel {
       auto c = pixel_tl + ((double)x) * pixel_dx + ((double)y) * pixel_dy;
       
       auto z = c;
       int i = 0;
       while (i < iterlim) {
-         z = z*z + c;
+         z = z*z + z*c + c; 
          if (std::abs(z) >= 2)
             break;
          i++;
@@ -91,5 +92,5 @@ int main() {
       
    });
 
-   im.write("mandelbrot.png"); 
+   im.write("fractal.png"); 
 }
