@@ -2,6 +2,7 @@
 #ifndef MOVIE_HPP
 #define MOVIE_HPP
 
+#include <format.hpp>
 #include <frame.hpp>
 #include <pixel.hpp>
 
@@ -9,6 +10,8 @@
 #include <png.h>
 #include <stdlib.h>
 #include <string>
+
+#include <iostream>
 
 namespace im {
 
@@ -19,16 +22,17 @@ namespace im {
       FILE *_movie;
 
       movie(std::string filename) {
-         _movie = popen(std::format("ffmpeg -y -f rawvideo -vcodec rawvideo -pix_fmt rgb{} -s {}x{} -r {} -i - -f mp4 -q:v {} -an -vcodec mpeg4 {}", sizeof(png_byte)*24, width, height, fps, quality, filename), "w");
+         std::cout << string_format("ffmpeg -y -f rawvideo -vcodec rawvideo -pix_fmt rgb%u -s %ux%u -r %u -i - -f mp4 -q:v %u -an -vcodec mpeg4 %s", sizeof(png_byte)*24, width, height, fps, quality, filename) << std::endl;
+         _movie = popen(string_format("ffmpeg -y -f rawvideo -vcodec rawvideo -pix_fmt rgb%u -s %ux%u -r %u -i - -f mp4 -q:v %u -an -vcodec mpeg4 %s", sizeof(png_byte)*24, width, height, fps, quality, filename.c_str()).c_str(), "w");
       }
 
       inline void write_frame() {
-         fwrite(_frame.pixels, sizeof(png_byte), height*width*3, _movie);
+         fwrite(_frame._pixels, sizeof(png_byte), height*width*3, _movie);
       }
 
       inline void write_frame(std::function<pixel(unsigned, unsigned)> painter) {
          _frame.paint(painter);
-         write_frame()
+         write_frame();
       }
 
       ~movie() {

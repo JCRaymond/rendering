@@ -2,8 +2,11 @@
 !/**/
 !*.*
 
+!Makefile
+
 *.swp
 *.swo
 
-render.png
+*.png
+*.mp4
 

@@ -7,17 +7,18 @@
 using complex = std::complex<double>;
 
 int main() {
+   auto t = timer();
    // 1k
-   //const unsigned im_x = 1920;
-   //const unsigned im_y = 1080;
+   const unsigned im_x = 1920;
+   const unsigned im_y = 1080;
 
    // 2k
    //const unsigned im_x = 2560;
    //const unsigned im_y = 1440;
 
    // 4k
-   const unsigned im_x = 3810;
-   const unsigned im_y = 2160;
+   //const unsigned im_x = 3810;
+   //const unsigned im_y = 2160;
 
    // 8k
    //const unsigned im_x = 7620;
@@ -28,8 +29,9 @@ int main() {
    //const unsigned im_y = 8640;
 
    double height = 1; //0.00003;
-   complex center = {0,0};
+   //complex center = {0,0};
    //complex center = {-0.761575990961605,-0.084759600310245}; // Spiral!
+   complex center = {-0.7746806106269039,-0.1374168856037867};
    //complex center = {-0.685, 0.3};
    double pixel_height = 2 * (height / im_y);
 
@@ -50,7 +52,7 @@ int main() {
       auto z = c;
       int i = 0;
       while (i < iterlim) {
-         z = z*z + z*c + c; 
+         z = z*z + c; 
          if (std::abs(z) >= 2)
             break;
          i++;
@@ -93,4 +95,5 @@ int main() {
    });
 
    im.write("fractal.png"); 
+   std::cout << t.get_time() << std::endl;
 }
